@@ -4,17 +4,17 @@ import { HttpWrapperService } from "../../core/http/http-wrapper.service";
 
 @Injectable()
 export class SettingsService {
-  constructor(private httpWrapper: HttpWrapperService) {}
+  constructor(private _httpWrapperService: HttpWrapperService) {}
 
   public getFilters() {
-    if (environment.production) {
-      return this.httpWrapper.get(
-        `${environment.api_url}/clinical-data-solutions/solutionList.json`
-      );
-    } else {
-      return this.httpWrapper.get(
-        `${environment.local_url}/clinical-data-solutions/solutionList.json`
-      );
-    }
+    return this._httpWrapperService.get(
+      `${environment.local_url}/settings/settingList.json`
+    );
+  }
+
+  public getSettingData() {
+    return this._httpWrapperService.get(
+      `${environment.local_url}/settings/roleList.json`
+    );
   }
 }
